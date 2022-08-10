@@ -15,10 +15,25 @@ function TodoItem({item}){
             console.log(error);
         })
     });
+    const Completed=useCallback((e)=>{
+        console.log(item.isCompleted);
+        const id=item.id;
+        const status=item.isCompleted;
+        console.log("아이디는"+id);
+        console.log("상태는"+status);
+        axios.patch("http://localhost:5000/todo/status/"+id).then(function(response){
+            console.log(response);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    });
     return(
             <li className='todoItem'>
-                <button className="checkButton"><img className='checkImg' src={check}></img>
-                </button>
+                {item.isCompleted==false&&<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
+                </button>}
+                {item.isCompleted==true&&<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
+                </button>}
                 <div className='todoItemText'>{content}</div>
                 <button onClick={Delete} className='deleteButton'>X</button>
             </li>
