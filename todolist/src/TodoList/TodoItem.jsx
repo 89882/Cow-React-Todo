@@ -10,6 +10,8 @@ function TodoItem(props){
     const  item  = props.item;
     const change=props.change;
     const setChange=props.setChange;
+    const filter=props.filter;
+    const setFilter=props.setFilter;
     const Delete=useCallback((e)=>{
         console.log(item.isCompleted);
         console.log(item.id);
@@ -64,19 +66,51 @@ function TodoItem(props){
     const Change=useCallback((e)=>{
         setEditValue(e.target.value);
     });
-    return(
-            <li className='todoItem'>
-                {item.isCompleted===false&&<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
-                </button>}
-                {item.isCompleted===true&&<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
-                </button>}
-                {edit&&<div className='todoItemText'>{item.content}</div>}
-                {!edit&&<div className='todoItemText'><input className="editInput" onChange={Change} value={editvalue} size="30"type="text" placeholder="수정하기"></input></div>}
-                {edit&&<button onClick={Edit} className='pencilButton'><img className='pencilImg' src={pencil} ></img></button>}
-                {!edit&&<button onClick={Finish} className="finishButton">수정</button>}
-                <button onClick={Delete} className='deleteButton'>X</button>
-            </li>
-    );
+    if(filter==='all'){return(
+        <li className='todoItem'>
+            {item.isCompleted===false&&<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
+            </button>}
+            {item.isCompleted===true&&<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
+            </button>}
+            {edit&&<div className='todoItemText'>{item.content}</div>}
+            {!edit&&<div className='todoItemText'><input className="editInput" onChange={Change} value={editvalue} size="30"type="text" placeholder="수정하기"></input></div>}
+            {edit&&<button onClick={Edit} className='pencilButton'><img className='pencilImg' src={pencil} ></img></button>}
+            {!edit&&<button onClick={Finish} className="finishButton">수정</button>}
+            <button onClick={Delete} className='deleteButton'>X</button>
+        </li>
+);
+}//filter가 all일떄
+else if(filter==='active'){
+    if(item.isCompleted===false){return(
+        <li className='todoItem'>
+            {item.isCompleted===false&&<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
+            </button>}
+            {item.isCompleted===true&&<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
+            </button>}
+            {edit&&<div className='todoItemText'>{item.content}</div>}
+            {!edit&&<div className='todoItemText'><input className="editInput" onChange={Change} value={editvalue} size="30"type="text" placeholder="수정하기"></input></div>}
+            {edit&&<button onClick={Edit} className='pencilButton'><img className='pencilImg' src={pencil} ></img></button>}
+            {!edit&&<button onClick={Finish} className="finishButton">수정</button>}
+            <button onClick={Delete} className='deleteButton'>X</button>
+        </li>
+);}
+}//filter가 active일때
+else if(filter==='completed'){
+    if(item.isCompleted===true){return(
+        <li className='todoItem'>
+            {item.isCompleted===false&&<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
+            </button>}
+            {item.isCompleted===true&&<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
+            </button>}
+            {edit&&<div className='todoItemText'>{item.content}</div>}
+            {!edit&&<div className='todoItemText'><input className="editInput" onChange={Change} value={editvalue} size="30"type="text" placeholder="수정하기"></input></div>}
+            {edit&&<button onClick={Edit} className='pencilButton'><img className='pencilImg' src={pencil} ></img></button>}
+            {!edit&&<button onClick={Finish} className="finishButton">수정</button>}
+            <button onClick={Delete} className='deleteButton'>X</button>
+        </li>
+);}// filter가 completed일때
 }
+}
+
 
 export default TodoItem;
