@@ -61,7 +61,7 @@ border-radius:100px;
 color:white;
 background-color:rgba(156, 207, 155, 1);
 }
-input::placeholder{
+.insertInput::placeholder{
     position: absolute;
     left:90px;
     top:20px;
@@ -72,6 +72,17 @@ input::placeholder{
     font-size: 33px;
     color: #C2BABA;
 }
+/* input::placeholder{
+    position: absolute;
+    left:90px;
+    top:20px;
+    text-align: center;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 33px;
+    color: #C2BABA;
+} */
 .todoList{
     position: absolute;
     top:80px;
@@ -123,7 +134,7 @@ input::placeholder{
     border:1.2px solid rgba(234, 174, 174, 1) ;
     color:rgba(234, 174, 174, 1);
     background-color: white;
-    margin-left:40px;
+    margin-left:20px;
 }
 .buttom{
     position:absolute;
@@ -148,4 +159,36 @@ input::placeholder{
 .date{
     margin-left:20px;
     padding-top:17px;
+}
+.pencilImg{
+    width: 25px;
+    height: 25px;
+}
+.pencilButton{
+    background-color: #FFFFFF;
+    border:none;
+    margin-left:10px;
+}
+.editInput{
+    width:460px;
+    height:40px;
+    font-size:30px;
+    border:none;
+    margin-bottom:5px;
+}
+.editInput::placeholder{
+    font-family: 'DM Sans';
+    font-style:normal;
+    font-weight: 300;
+    font-size: 25px;
+    color: #c5c5c5;
+}
+.finishButton{
+    background-color:rgb(218, 243, 217);
+    border:none;
+    margin-left:10px;
+    width:70px;
+    font-weight:700;
+    color:rgb(0, 0, 0);
+    border-radius:20px;
 }
