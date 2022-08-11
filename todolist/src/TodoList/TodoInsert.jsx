@@ -2,6 +2,8 @@ import React ,{useState, useCallback} from "react";
 import axios from 'axios';
 
 function TodoInsert(props){
+    const change=props.change;
+    const setChange=props.setChange;
     const value= props.value;
     const setValue=props.setValue;
     const url="http://localhost:5000/todo";
@@ -16,6 +18,7 @@ const onSubmit = useCallback( (e)=>{
     .then(function(response){
         console.log("성공");
         console.log(response);
+        setChange(change+1);
     })
     .catch(function(error){
         console.log("실패");
