@@ -41,7 +41,8 @@ border-bottom:1px solid black;
     left:30px;
     height:70px;
     width:570px;
-    font-size:30px;
+    font-size:28px;
+    font-weight:550;
     border:none;
 }
 input:focus{
