@@ -1,17 +1,20 @@
 import React ,{useState,useCallback} from "react";
-import check from "./check.png";
 import axios from "axios";
-import pencil from "./pencil.png";
+import CompletedButton from "./CompletedButton";
+import EditText from "./EditText";
 
 
 function TodoItem(props){
     const[edit , setEdit]=useState(true);
     const [editvalue, setEditValue]= useState('');
     const  item  = props.item;
+    const complete = item.isCompleted;
+    const content = item.content;
     const change=props.change;
     const setChange=props.setChange;
     const filter=props.filter;
-    const setFilter=props.setFilter;
+
+
     const Delete=useCallback((e)=>{
         console.log(item.isCompleted);
         console.log(item.id);
@@ -25,6 +28,8 @@ function TodoItem(props){
             console.log(error);
         })
     });
+
+
     const Completed=useCallback((e)=>{
         console.log(item.isCompleted);
         const id=item.id;
@@ -39,12 +44,16 @@ function TodoItem(props){
             console.log(error);
         })
     });
+
+
     const Edit=useCallback((e)=>{
         setEdit(!edit);
         //여기서는 연필 버튼을 누른거기에 true인 edit이 false로 바뀐다
         setChange(change+1);
         //그러면 이제 change가 일어났으니까 화면 렌더링 즉 수정할 애는 비어있게 렌더링
     }); //수정하려고 버튼을 눌렀을 때
+
+
     const Finish = useCallback((e)=>{
         if(e.key==='Enter'){    const id=item.id;
             axios.patch("http://localhost:5000/todo/"+id,{"content":editvalue})
@@ -64,50 +73,43 @@ function TodoItem(props){
         
     });
 
+
     const Change=useCallback((e)=>{
         setEditValue(e.target.value);
     });
-    if(filter==='all'){return(
+
+    
+    if(filter==='all'){
+        return(
         <li className='todoItem'>
-            {item.isCompleted===false&&<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
-            </button>}
-            {item.isCompleted===true&&<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
-            </button>}
-            {edit&&<div className='todoItemText'>{item.content}</div>}
-            {!edit&&<div className='todoItemText'><input className="editInput" onKeyPress={Finish} onChange={Change} value={editvalue} size="30"type="text" placeholder="수정하기"></input></div>}
-            {edit&&<button onClick={Edit} className='pencilButton'><img className='pencilImg' src={pencil} ></img></button>}
-            {!edit&&<div className="finishButton"></div>}
+            <CompletedButton complete ={complete} Completed ={Completed}></CompletedButton>
+            <EditText Edit ={Edit}edit ={edit}content={content} Finish={Finish} Change={Change} editvalue={editvalue}></EditText>
             {<button onClick={Delete} className='deleteButton'>X</button>}
         </li>
 );
-}//filter가 all일떄
+}//filter가 all일때
+
 else if(filter==='active'){
-    if(item.isCompleted===false){return(
+    if(item.isCompleted===false){
+        return(
         <li className='todoItem'>
-            {item.isCompleted===false&&<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
-            </button>}
-            {edit&&<div className='todoItemText'>{item.content}</div>}
-            {!edit&&<div className='todoItemText'><input className="editInput" onKeyPress={Finish} onChange={Change} value={editvalue} size="30"type="text" placeholder="수정하기"></input></div>}
-            {edit&&<button onClick={Edit} className='pencilButton'><img className='pencilImg' src={pencil} ></img></button>}
-            {!edit&&<div className="finishButton"></div>}
+            <CompletedButton complete ={complete} Completed ={Completed}></CompletedButton>
+            <EditText  Edit={Edit}edit ={edit} content={content} Finish={Finish} Change={Change} editvalue={editvalue}></EditText>
             <button onClick={Delete} className='deleteButton'>X</button>
         </li>
 );}
 }//filter가 active일때
+
 else if(filter==='completed'){
-    if(item.isCompleted===true){return(
+    if(item.isCompleted===true){
+        return(
         <li className='todoItem'>
-            {item.isCompleted===true&&<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
-            </button>}
-            {edit&&<div className='todoItemText'>{item.content}</div>}
-            {!edit&&<div className='todoItemText'><input className="editInput" onKeyPress={Finish} onChange={Change} value={editvalue} size="30"type="text" placeholder="수정하기"></input></div>}
-            {edit&&<button onClick={Edit} className='pencilButton'><img className='pencilImg' src={pencil} ></img></button>}
-            {!edit&&<div  className="finishButton"></div>}
+            <CompletedButton complete ={complete} Completed ={Completed}></CompletedButton>
+            <EditText Edit={Edit} edit ={edit} content={content} Finish={Finish} Change={Change} editvalue={editvalue}></EditText>
             <button onClick={Delete} className='deleteButton'>X</button>
         </li>
 );}// filter가 completed일때
 }
 }
-
 
 export default TodoItem;
