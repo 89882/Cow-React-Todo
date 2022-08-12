@@ -187,5 +187,8 @@ background-color:rgba(156, 207, 155, 1);
 .finishButton{
     border:none;
     margin-left:10px;
-    width:63px;
+    width:37px;
+}
+.Edit{
+    display:flex;
 }
