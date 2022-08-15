@@ -79,7 +79,7 @@ function TodoItem(props){
     });
 
     
-    if(filter==='all'){
+    if(filter.current==='all'){
         return(
         <li className='todoItem'>
             <CompletedButton complete ={complete} Completed ={Completed}></CompletedButton>
@@ -89,7 +89,7 @@ function TodoItem(props){
 );
 }//filter가 all일때
 
-else if(filter==='active'){
+else if(filter.current==='active'){
     if(item.isCompleted===false){
         return(
         <li className='todoItem'>
@@ -100,7 +100,7 @@ else if(filter==='active'){
 );}
 }//filter가 active일때
 
-else if(filter==='completed'){
+else if(filter.current==='completed'){
     if(item.isCompleted===true){
         return(
         <li className='todoItem'>
