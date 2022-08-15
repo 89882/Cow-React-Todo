@@ -3,17 +3,17 @@ import React ,{useCallback}from "react";
 function TodoButtom(props){
     const change=props.change;
     const setChange=props.setChange;
-    const setFilter=props.setFilter;
+    const filter=props.filter
     const all=useCallback(()=>{
-        setFilter('all');
+        filter.current="all";
         setChange(change+1);
     });
     const active=useCallback(()=>{
-        setFilter('active');
+        filter.current="active";
         setChange(change+1);
     });
     const completed=useCallback(()=>{
-        setFilter('completed');
+        filter.current="completed";
         setChange(change+1);
     });
 
