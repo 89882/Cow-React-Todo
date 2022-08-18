@@ -3,14 +3,14 @@ import check from "./check.png";
 
 function CompletedButton(props){
     const complete = props.complete;
-    const Completed= props.Completed;
+    const handleCompleted= props.handleCompleted;
 
 
     if(complete===false){
-        return(<button onClick={Completed}className="checkButton2"><img className='checkImg' src={check}></img>
+        return(<button onClick={handleCompleted}className="checkButton2"><img className='checkImg' src={check}></img>
         </button>);
     }
-    else if(complete === true){return(<button onClick={Completed} className="checkButton"><img className='checkImg' src={check}></img>
+    else if(complete === true){return(<button onClick={handleCompleted} className="checkButton"><img className='checkImg' src={check}></img>
     </button>);
     }
 
