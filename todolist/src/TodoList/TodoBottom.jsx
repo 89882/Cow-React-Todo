@@ -1,19 +1,19 @@
 import React ,{useCallback}from "react";
 
-function TodoButtom(props){
+function TodoBottom(props){
     const change=props.change;
     const setChange=props.setChange;
-    const filter=props.filter
+    const setFilter=props.setFilter;
     const all=useCallback(()=>{
-        filter.current="all";
+        setFilter('all');
         setChange(change+1);
     });
     const active=useCallback(()=>{
-        filter.current="active";
+        setFilter('active');
         setChange(change+1);
     });
     const completed=useCallback(()=>{
-        filter.current="completed";
+        setFilter('completed');
         setChange(change+1);
     });
 
@@ -36,4 +36,4 @@ function TodoButtom(props){
     );
 }
 
-export default TodoButtom;
+export default TodoBottom;

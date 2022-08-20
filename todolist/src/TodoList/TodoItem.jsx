@@ -15,7 +15,7 @@ function TodoItem(props){
     const filter=props.filter;
 
 
-    const handleDelete=useCallback((e)=>{
+    const Delete=useCallback((e)=>{
         console.log(item.isCompleted);
         console.log(item.id);
         const id=item.id;
@@ -30,7 +30,7 @@ function TodoItem(props){
     });
 
 
-    const handleCompleted=useCallback((e)=>{
+    const Completed=useCallback((e)=>{
         console.log(item.isCompleted);
         const id=item.id;
         const status=item.isCompleted;
@@ -46,7 +46,7 @@ function TodoItem(props){
     });
 
 
-    const handleEdit=useCallback((e)=>{
+    const Edit=useCallback((e)=>{
         setEdit(!edit);
         //여기서는 연필 버튼을 누른거기에 true인 edit이 false로 바뀐다
         setChange(change+1);
@@ -54,7 +54,7 @@ function TodoItem(props){
     }); //수정하려고 버튼을 눌렀을 때
 
 
-    const handleFinish = useCallback((e)=>{
+    const Finish = useCallback((e)=>{
         if(e.key==='Enter'){    const id=item.id;
             axios.patch("http://localhost:5000/todo/"+id,{"content":editvalue})
             .then(function(response){
@@ -74,39 +74,39 @@ function TodoItem(props){
     });
 
 
-    const handleChange=useCallback((e)=>{
+    const Change=useCallback((e)=>{
         setEditValue(e.target.value);
     });
 
     
-    if(filter.current==='all'){
+    if(filter==='all'){
         return(
         <li className='todoItem'>
-            <CompletedButton complete ={complete} handleCompleted={handleCompleted}></CompletedButton>
-            <EditText handleEdit={handleEdit}edit ={edit}content={content} handleFinish={handleFinish} handleChange={handleChange} editvalue={editvalue}></EditText>
-            {<button onClick={handleDelete} className='deleteButton'>X</button>}
+            <CompletedButton complete ={complete} Completed={Completed}></CompletedButton>
+            <EditText Edit={Edit} edit ={edit}content={content} Finish={Finish} Change={Change} editvalue={editvalue}></EditText>
+            {<button onClick={Delete} className='deleteButton'>X</button>}
         </li>
 );
 }//filter가 all일때
 
-else if(filter.current==='active'){
+else if(filter==='active'){
     if(item.isCompleted===false){
         return(
         <li className='todoItem'>
-            <CompletedButton complete ={complete} handleCompleted={handleCompleted}></CompletedButton>
-            <EditText handleEdit={handleEdit}edit ={edit} content={content} handleFinish={handleFinish}  handleChange={handleChange} editvalue={editvalue}></EditText>
-            <button onClick={handleDelete} className='deleteButton'>X</button>
+            <CompletedButton complete ={complete} Completed={Completed}></CompletedButton>
+            <EditText Edit={Edit} edit ={edit} content={content} Finish={Finish}  Change={Change} editvalue={editvalue}></EditText>
+            <button onClick={Delete} className='deleteButton'>X</button>
         </li>
 );}
 }//filter가 active일때
 
-else if(filter.current==='completed'){
+else if(filter==='completed'){
     if(item.isCompleted===true){
         return(
         <li className='todoItem'>
-            <CompletedButton complete ={complete} handleCompleted={handleCompleted}></CompletedButton>
-            <EditText handleEdit={handleEdit} edit ={edit} content={content} handleFinish={handleFinish}  handleChange={handleChange} editvalue={editvalue}></EditText>
-            <button onClick={handleDelete} className='deleteButton'>X</button>
+            <CompletedButton complete ={complete} Completed={Completed}></CompletedButton>
+            <EditText Edit={Edit} edit ={edit} content={content} Finish={Finish}  Change={Change} editvalue={editvalue}></EditText>
+            <button onClick={Delete} className='deleteButton'>X</button>
         </li>
 );}// filter가 completed일때
 }

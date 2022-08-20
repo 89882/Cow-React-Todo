@@ -19,12 +19,12 @@ const onSubmit = useCallback( (e)=>{
     .then(function(response){
         console.log("성공");
         console.log(response);
+        setChange(change+1);
     })
     .catch(function(error){
         console.log("실패");
         console.log(error);
     })
-    setChange(change+1);
 });
 //제출 버튼을 누르면 그 value값을 post해서 전송
     return(
